@@ -9,15 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Lista </title>
     </head>
-        <form action="miServlet" method="POST" id="form" name="form" onsubmit="return esValido()">
+        <form action="miServlet" method="GET" id="form" name="form" onsubmit="return esValido()">
             
-          Dato <input type="tel" name="dato" size="3">
+          Dato <input type="tel" name="dato" size="3" autofocus>
           <button type="submit" name="operar" >Operar</button>
           <br>
           <br>
-          <input type="radio" name="opcion" value="alInicio" checked>Insertar al inicio
+          <input type="radio" name="opcion" value="alInicio">Insertar al inicio
           <br>
           <input type="radio" name="opcion" value="alFinal">Insertar al final
           <br>
@@ -26,22 +26,35 @@
           <br>
           Nodos en la lista
           <br>
-          <input type="text" name="list" readonly value="<%= (getServletContext().getAttribute("salida") == null) ? "" : getServletContext().getAttribute("salida")  %>">
+          <% 
+              String lista; 
+              // Validar si lista es null
+              if((getServletContext().getAttribute("lista") == null)){
+                  // Si es null, se muestra como vacio
+                  lista = "";
+              } else {
+                  // Si no es null, mostramos la lista en el input de salida
+                  lista = getServletContext().getAttribute("lista").toString();
+              }
+          %>
+          <input type="text" name="list" readonly value="<%= lista  %>">
           
         </form>
         <script>
             function esValido(e){
-                
+                // Obtener ambos valores del dato y la opcion
                 var dato = document.forms.form.dato.value;
                 var opcion = document.forms.form.opcion.value;                
                 var valido;
-                
-                if(dato === '' || opcion === ''){
+                // Si tiene valores, ejecutar una accion
+                if(!dato || !opcion){
                     valido = false;
                 } else {
+                // Si tiene valores, ejecutar una accion
                     valido = true;
                 }
                 
+                // Retornar true o false
                 return valido;
             };
         </script>

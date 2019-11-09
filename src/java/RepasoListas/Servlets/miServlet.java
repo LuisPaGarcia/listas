@@ -52,26 +52,23 @@ public class miServlet extends HttpServlet {
             
             // Validar que accion queremos hacer
             if(opcion.equals(alInicio)){
-                //linkedList.addFirst(dato);         
                 lista.AgregarAlInicio(linkedList, dato);
             }
             
 
             // Validar que accion queremos hacer
             if(opcion.equals(alFinal)){
-                //linkedList.addLast(dato);
                 lista.AgregarAlFinal(linkedList, dato);
             }
 
             // Validar que accion queremos hacer
             if(opcion.equals(eliminar)){
-                //linkedList.remove(dato);
                 lista.Eliminar(linkedList, dato);
             }
                         
             getServletContext().setAttribute("dato", dato);            
             getServletContext().setAttribute("option", opcion);            
-            getServletContext().setAttribute("salida", linkedList.toString());            
+            getServletContext().setAttribute("lista", linkedList.toString());            
             request.getRequestDispatcher("index.jsp").forward(request, response);
             
         }
